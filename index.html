@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pluto's Lifestyle and solution</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a3a5f;
+            --secondary: #d4af37;
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            padding-top: 80px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(26, 58, 95, 0.9)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-image {
+            height: 200px;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .steel-image { background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(26, 58, 95, 0.9)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); }
+        .roof-image { background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(26, 58, 95, 0.9)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); }
+        .tree-image { background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(26, 58, 95, 0.9)), url('https://images.unsplash.com/photo-1599004955575-b2ace1ba1c8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); }
+        .paint-image { background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(26, 58, 95, 0.9)), url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); }
+        .chicken-image { background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(26, 58, 95, 0.9)), url('https://images.unsplash.com/photo-1596733430284-f7437764b1a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .service-btn {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: var(--transition);
+        }
+
+        .service-btn:hover {
+            color: var(--secondary);
+        }
+
+        /* About Preview */
+        .about-preview {
+            padding: 80px 0;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--secondary);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            opacity: 0.3;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            margin: 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(rgba(26, 58, 95, 0.9), rgba(26, 58, 95, 0.9)), url('https://images.unsplash.com/photo-1541976590-713941681591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .cta h2 {
+            color: white;
+        }
+
+        .cta h2::after {
+            background-color: white;
+        }
+
+        /* About Page */
+        .about-content {
+            padding: 80px 0;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
+        }
+
+        .service-features {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .features-list {
+            list-style-type: none;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Values Section */
+        .values {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .value-card h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Contact Page */
+        .contact-content {
+            padding: 80px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-details {
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .contact-details-text h4 {
+            margin-bottom: 5px;
+        }
+
+        .contact-details-text p {
+            margin: 0;
+        }
+
+        .contact-form {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Services Contact Section */
+        .services-contact {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .services-grid-contact {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card-contact {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .service-card-contact h3 {
+            margin-bottom: 10px;
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 80px 0;
+        }
+
+        .map-placeholder {
+            height: 400px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            background-color: var(--light);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background-color: #e9ecef;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-question span {
+            transform: rotate(45deg);
+        }
+
+        /* Service Pages */
+        .service-hero {
+            background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(26, 58, 95, 0.9)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .service-hero h1 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .service-details {
+            padding: 80px 0;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
+        }
+
+        .folder {
+            margin-top: 30px;
+        }
+
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .folder-grid img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .process-steps {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+        }
+
+        .service-cta {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-container, .contact-content, .service-details, .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image, .contact-info, .service-content {
+                order: -1;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 0 10px;
+            }
+            
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .services-grid, .testimonials-grid, .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                width: 95%;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .services-grid-contact {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Pluto's <span>Lifestyle and solution</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Your Trusted Property Solutions Partner</h1>
+                <p>Professional steel works, roof maintenance, tree felling, painting, and chicken house construction services</p>
+                <a href="#services" class="btn">Explore Our Services</a>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services" id="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <!-- Steel Works Service -->
+                    <div class="service-card">
+                        <div class="service-image steel-image">
+                            Steel Works
+                        </div>
+                        <div class="service-content">
+                            <h3>Steel Works</h3>
+                            <p>Custom fabrication and installation of steel structures for industrial, commercial, and residential applications.</p>
+                            <a href="#" class="service-btn" data-page="steel-works">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Roof Maintenance Service -->
+                    <div class="service-card">
+                        <div class="service-image roof-image">
+                            Roof Maintenance
+                        </div>
+                        <div class="service-content">
+                            <h3>Roof Maintenance</h3>
+                            <p>Comprehensive roof inspection and repair maintenance to protect your property from weather elements.</p>
+                            <a href="#" class="service-btn" data-page="roof-maintenance">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Tree Felling Service -->
+                    <div class="service-card">
+                        <div class="service-image tree-image">
+                            Tree Felling
+                        </div>
+                        <div class="service-content">
+                            <h3>Tree Felling</h3>
+                            <p>Safe and efficient tree removal services for residential and commercial properties with minimal disruption.</p>
+                            <a href="#" class="service-btn" data-page="tree-felling">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Painting Service -->
+                    <div class="service-card">
+                        <div class="service-image paint-image">
+                            Painting
+                        </div>
+                        <div class="service-content">
+                            <h3>Painting</h3>
+                            <p>Interior and exterior painting services with premium materials and flawless finishes for lasting beauty.</p>
+                            <a href="#" class="service-btn" data-page="painting">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Chicken Houses Service -->
+                    <div class="service-card">
+                        <div class="service-image chicken-image">
+                            Chicken Houses
+                        </div>
+                        <div class="service-content">
+                            <h3>Chicken Houses</h3>
+                            <p>Design and construction of custom chicken houses for small-scale farming and commercial poultry operations.</p>
+                            <a href="#" class="service-btn" data-page="chicken-houses">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Preview Section -->
+        <section class="about-preview">
+            <div class="container about-container">
+                <div class="about-text">
+                    <h2>About Pluto's Lifestyle and solution</h2>
+                    <p>With over a decade of experience, we've built a reputation for quality workmanship, reliability, and exceptional customer service in the property solutions industry.</p>
+                    <p>Our team of skilled professionals brings expertise across multiple disciplines, ensuring comprehensive solutions for all your property needs.</p>
+                    <a href="#" class="btn" data-page="about">Learn More About Us</a>
+                </div>
+                <div class="about-image">
+                   <img src="project pictures/company image.jpg" alt="steel work" style="width:80%;border-radius:8px;">
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <h2>What Our Clients Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Pluto's Lifestyle and solution transformed our property with their exceptional steel work. The team was professional, efficient, and the quality exceeded our expectations."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JD</div>
+                            <div class="author-info">
+                                <h4>John Rwendo</h4>
+                                <p>Commercial Property Owner</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Their roof maintenance service saved us from costly repairs. The team identified issues we didn't even know we had and fixed them promptly."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">SM</div>
+                            <div class="author-info">
+                                <h4>Sarah Mitchell</h4>
+                                <p>Homeowner</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The chicken house they built for our farm is sturdy, well-designed, and has improved our poultry operation significantly. Highly recommended!"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">RW</div>
+                            <div class="author-info">
+                                <h4>Robert Williams</h4>
+                                <p>Farm Owner</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to Start Your Project?</h2>
+                <p>Contact us today for a free consultation and quote. Let's discuss how we can help with your property needs.</p>
+                <a href="#" class="btn" data-page="contact">Get in Touch</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <section class="hero">
+            <div class="container">
+                <h1>About Pluto's Lifestyle and solution</h1>
+                <p>Building, maintaining, and enhancing properties with quality craftsmanship since 2010</p>
+            </div>
+        </section>
+
+        <section class="container about-content">
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>Founded in 2015, Pluto's Lifestyle and solution has grown from a small local business to a trusted provider of comprehensive property solutions. Our journey began with a simple goal: to provide reliable, high-quality services that help our clients maintain and improve their properties.</p>
+                <p>Over the years, we've expanded our expertise to cover a wide range of services, always maintaining our commitment to excellence and customer satisfaction. Our team of skilled professionals brings years of experience and a passion for quality workmanship to every project we undertake.</p>
+                <p>At Pluto's Lifestyle and solution, we believe that every property deserves the best care. Whether it's a residential home, commercial building, or agricultural facility, we approach each project with the same dedication to quality and attention to detail.</p>
+            </div>
+            
+            <div class="service-features">
+                <h3>Our Services</h3>
+                
+                <ul class="features-list">
+                    <li>Steel Works - Custom fabrication and installation</li>
+                    <li>Roof Maintenance - Inspection, repair, and maintenance</li>
+                    <li>Tree Felling - Safe and efficient tree removal</li>
+                    <li>Painting - Interior and exterior with quality finishes</li>
+                    <li>Chicken Houses - Design and construction of poultry housing</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values">
+            <div class="container">
+                <h2>Our Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <h3>Quality</h3>
+                        <p>We never compromise on the quality of our work, using the best materials and techniques for lasting results.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <h3>Reliability</h3>
+                        <p>Our clients trust us to deliver on our promises, completing projects on time and within budget.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <h3>Expertise</h3>
+                        <p>With years of experience across multiple disciplines, we bring specialized knowledge to every project.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <h3>Customer Focus</h3>
+                        <p>We listen to our clients' needs and work closely with them to achieve their vision.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to Start Your Project?</h2>
+                <p>Contact us today for a free consultation and quote. Let us help you bring your vision to life with our expert services.</p>
+                <a href="#" class="btn" data-page="contact">Get in Touch</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <section class="hero">
+            <div class="container">
+                <h1>Contact Pluto's Lifestyle and solution</h1>
+                <p>Get in touch with our team for all your steel works, roof maintenance, tree felling, painting, and chicken house needs</p>
+            </div>
+        </section>
+
+        <section class="container contact-content">
+            <div class="contact-info">
+                <h2>Get In Touch</h2>
+                <p>We're here to help with all your property maintenance and construction needs. Whether you have a question about our services or want to request a quote, our team is ready to assist you.</p>
+                <p>At Pluto's Lifestyle and solution, we pride ourselves on prompt responses and personalized service. Contact us today and let's discuss how we can help with your project.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">A</div>
+                        <div class="contact-details-text">
+                            <h4>Address</h4>
+                            <p>10135 Mmakau Polonia section North West</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">P</div>
+                        <div class="contact-details-text">
+                            <h4>Phone</h4>
+                            <p>+27 70 315 1601<br>Mon-Fri: 8am-6pm</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">E</div>
+                        <div class="contact-details-text">
+                            <h4>Email</h4>
+                            <p>courageousmukuwe@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">H</div>
+                        <div class="contact-details-text">
+                            <h4>Business Hours</h4>
+                            <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 8:00 AM - 3:00 PM<br>Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h2>Send Us a Message</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service">Service Interested In</label>
+                        <select id="service" class="form-control">
+                            <option value="">Select a service</option>
+                            <option value="steel-works">Steel Works</option>
+                            <option value="roof-maintenance">Roof Maintenance</option>
+                            <option value="tree-felling">Tree Felling</option>
+                            <option value="painting">Painting</option>
+                            <option value="chicken-houses">Chicken Houses</option>
+                            <option value="multiple">Multiple Services</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services-contact">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid-contact">
+                    <div class="service-card-contact">
+                        <h3>Steel Works</h3>
+                        <p>Custom fabrication and installation of steel structures</p>
+                    </div>
+                    
+                    <div class="service-card-contact">
+                        <h3>Roof Maintenance</h3>
+                        <p>Inspection, repair, and maintenance for all roof types</p>
+                    </div>
+                    
+                    <div class="service-card-contact">
+                        <h3>Tree Felling</h3>
+                        <p>Safe and efficient tree removal services</p>
+                    </div>
+                    
+                    <div class="service-card-contact">
+                        <h3>Painting</h3>
+                        <p>Interior and exterior painting with quality finishes</p>
+                    </div>
+                    
+                    <div class="service-card-contact">
+                        <h3>Chicken Houses</h3>
+                        <p>Design and construction of custom poultry housing</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="container map-section">
+            <h2>Our Location</h2>
+            <div class="map-placeholder">
+                <p><a href="https://www.google.com/maps/place/1035+Mmakau+polonia+section+North+West">View on Google Maps</a></p>
+                <p>10135 Mmakau Polonia section North West</p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container faq">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    How quickly can you start a project?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Project start times vary based on the scope of work and our current schedule. For emergency services like urgent roof repairs, we can often begin within 24-48 hours. For larger projects, we typically schedule 2-4 weeks in advance. Contact us for our current availability.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you provide free estimates?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, we offer free, no-obligation estimates for all our services. We'll visit your property, assess the work needed, and provide a detailed quote outlining the costs and timeline for your project.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Are you licensed and insured?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely. Pluto's Lifestyle and solution is fully licensed, bonded, and insured. We carry comprehensive liability insurance and workers' compensation coverage to protect our clients and our team.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    What areas do you serve?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We primarily serve the North West province and surrounding areas. For larger projects, we may travel further. Contact us to confirm if we service your specific location.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you offer emergency services?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, we offer emergency services for urgent situations like storm damage, fallen trees, or critical roof repairs. Call our main line and we'll dispatch a team as quickly as possible.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Service Pages -->
+    <!-- Steel Works Page -->
+    <div id="steel-works" class="page">
+        <section class="service-hero">
+            <div class="container">
+                <h1>Steel Works</h1>
+                <p>Custom fabrication and installation of durable steel structures for industrial, commercial, and residential applications</p>
+            </div>
+        </section>
+
+        <section class="container service-details">
+            <div class="service-content">
+                <h2>Professional Steel Fabrication & Installation</h2>
+                <p>At Pluto's Lifestyle and solution, we specialize in creating robust steel structures that stand the test of time. Our experienced team handles projects of all scales, from small residential additions to large industrial complexes.</p>
+                
+                <p>We work with high-quality materials and employ precision engineering techniques to ensure every steel structure we build meets the highest standards of safety, durability, and functionality.</p>
+                
+                <h3>Our Steel Work Capabilities</h3>
+                <p>From conceptual design to final installation, we manage the entire process to deliver steel solutions that perfectly match your requirements and budget.</p>
+                
+                <div class="folder">
+                    <h3>Project Gallery</h3>
+                    <div class="folder-grid">
+                 <img src="project pictures/steel work.1.jpg" alt="steel work" style="width:80%;border-radius:8px;">
+                     <img src="project pictures/steel work .2.jpg" alt="steel work" style="width:80%;border-radius:8px;">
+                      <img src="project pictures/steel work.3.jpg" alt="steel work" style="width:80%;border-radius:8px;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-features">
+                <h3>Our Steel Services</h3>
+                <ul class="features-list">
+                    <li>Custom steel building construction</li>
+                    <li>Steel frame fabrication</li>
+                    <li>Industrial steel structures</li>
+                    <li>Steel roofing systems</li>
+                    <li>Steel mezzanines & platforms</li>
+                    <li>Steel staircases & railings</li>
+                    <li>Structural steel repairs</li>
+                    <li>Steel welding services</li>
+                    <li>Steel corrosion protection</li>
+                    <li>Steel structure maintenance</li>
+                </ul>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background-color: #f8f9fa; border-radius: 6px;">
+                    <h4>Get a Free Quote</h4>
+                    <p>Contact us for a complimentary consultation and detailed estimate for your steel project.</p>
+                    <a href="#" class="btn" data-page="contact">Request Quote</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="process-steps">
+            <div class="container">
+                <h2 style="text-align: center; color: #1a3a5f; margin-bottom: 3rem;">Our Steel Work Process</h2>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>Consultation & Assessment</h3>
+                        <p>We begin with a detailed consultation to understand your requirements, assess the site, and discuss your vision for the project.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>Design & Planning</h3>
+                        <p>Our team creates detailed designs and plans, ensuring structural integrity and compliance with all building codes and regulations.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Fabrication</h3>
+                        <p>We precision-fabricate steel components in our workshop using advanced equipment and quality control measures.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h3>Installation</h3>
+                        <p>Our skilled technicians install the steel structure efficiently and safely, with minimal disruption to your operations.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div>
+                        <h3>Quality Assurance</h3>
+                        <p>We conduct thorough inspections and testing to ensure the completed structure meets our high standards and your expectations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="service-cta">
+                <h2>Ready to Build with Steel?</h2>
+                <p>Contact us today to discuss your steel project requirements. Our team is ready to provide you with a durable, cost-effective steel solution.</p>
+                <a href="#" class="btn" data-page="contact">Start Your Steel Project</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Roof Maintenance Page -->
+    <div id="roof-maintenance" class="page">
+        <section class="service-hero">
+            <div class="container">
+                <h1>Roof Maintenance</h1>
+                <p>Comprehensive roof inspection, repair, and maintenance services to protect your property from the elements</p>
+            </div>
+        </section>
+
+        <section class="container service-details">
+            <div class="service-content">
+                <h2>Protect Your Investment with Professional Roof Care</h2>
+                <p>Your roof is your property's first line of defense against weather elements. Regular maintenance is essential to extend its lifespan and prevent costly repairs. At Pluto's Lifestyle and solution, we offer comprehensive roof maintenance services for all types of roofing systems.</p>
+                
+                <p>Our experienced roof technicians can identify potential issues before they become major problems, saving you time, money, and stress in the long run.</p>
+                
+                <h3>Comprehensive Roof Services</h3>
+                <p>We provide a full range of roof maintenance and repair services tailored to your specific roofing material and property needs.</p>
+                
+                <div class="folder">
+                    <h3>Roof Maintenance Gallery</h3>
+                    <div class="folder-grid">
+                         <img src="project pictures/roof.1.jpg" alt="steel work" style="width:80%;border-radius:8px;">
+                         
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-features">
+                <h3>Our Roof Services</h3>
+                <ul class="features-list">
+                    <li>Roof inspection & assessment</li>
+                    <li>Leak detection & repair</li>
+                    <li>Shingle replacement</li>
+                    <li>Flashing repair & installation</li>
+                    <li>Gutter cleaning & repair</li>
+                    <li>Roof cleaning & moss removal</li>
+                    <li>Emergency roof repairs</li>
+                    <li>Preventative maintenance plans</li>
+                    <li>Roof coating application</li>
+                    <li>Storm damage assessment</li>
+                </ul>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background-color: #f8f9fa; border-radius: 6px;">
+                    <h4>Schedule an Inspection</h4>
+                    <p>Don't wait for leaks to appear. Contact us for a comprehensive roof assessment.</p>
+                    <a href="#" class="btn" data-page="contact">Book Inspection</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="process-steps">
+            <div class="container">
+                <h2 style="text-align: center; color: #1a3a5f; margin-bottom: 3rem;">Our Roof Maintenance Process</h2>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>Comprehensive Inspection</h3>
+                        <p>We conduct a thorough inspection of your roof, identifying any issues, potential problems, and areas needing attention.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>Detailed Report</h3>
+                        <p>You receive a comprehensive report with photos, findings, and recommended actions with transparent pricing.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Professional Repairs</h3>
+                        <p>Our skilled technicians perform necessary repairs using quality materials and proven techniques.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h3>Preventative Maintenance</h3>
+                        <p>We implement preventative measures to extend your roof's lifespan and prevent future issues.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div>
+                        <h3>Follow-up Assessment</h3>
+                        <p>We schedule follow-up inspections to ensure your roof remains in optimal condition.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="service-cta">
+                <h2>Protect Your Property Today</h2>
+                <p>Don't wait for minor roof issues to become major problems. Contact us for professional roof maintenance services.</p>
+                <a href="#" class="btn" data-page="contact">Schedule Roof Service</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Tree Felling Page -->
+    <div id="tree-felling" class="page">
+        <section class="service-hero">
+            <div class="container">
+                <h1>Tree Felling</h1>
+                <p>Safe and efficient tree removal services for residential and commercial properties with minimal disruption</p>
+            </div>
+        </section>
+
+        <section class="container service-details">
+            <div class="service-content">
+                <h2>Professional Tree Removal Services</h2>
+                <p>Tree felling requires expertise, proper equipment, and safety precautions. At Pluto's Lifestyle and solution, our certified arborists and tree specialists have the skills and experience to handle tree removal projects of any size safely and efficiently.</p>
+                
+                <p>We prioritize safety in every project, ensuring the protection of your property, our team, and the surrounding environment.</p>
+                
+                <h3>Safe Tree Removal Solutions</h3>
+                <p>Whether you need a single tree removed or multiple trees cleared from your property, we have the equipment and expertise to get the job done right.</p>
+                
+                <div class="folder">
+                    <h3>Tree Felling Gallery</h3>
+                    <div class="folder-grid">
+                   <img src="project pictures/tree filling.1.jpg" alt="steel work" style="width:80%;border-radius:8px;">
+                      <img src="project pictures/tree filling.2.jpg" alt="steel work" style="width:80%;border-radius:8px;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-features">
+                <h3>Our Tree Services</h3>
+                <ul class="features-list">
+                    <li>Tree felling & removal</li>
+                    <li>Stump grinding & removal</li>
+                    <li>Emergency tree services</li>
+                    <li>Dangerous tree removal</li>
+                    <li>Tree pruning & trimming</li>
+                    <li>Land clearing services</li>
+                    <li>Storm damage cleanup</li>
+                    <li>Branch chipping</li>
+                    <li>Site cleanup</li>
+                    <li>Tree health assessment</li>
+                </ul>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background-color: #f8f9fa; border-radius: 6px;">
+                    <h4>Emergency Tree Service</h4>
+                    <p>Fallen or dangerous trees? We offer 24/7 emergency response for urgent tree situations.</p>
+                    <a href="#" class="btn" data-page="contact">Emergency Call</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="process-steps">
+            <div class="container">
+                <h2 style="text-align: center; color: #1a3a5f; margin-bottom: 3rem;">Our Tree Felling Process</h2>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>Site Assessment</h3>
+                        <p>We evaluate the tree, surrounding structures, and potential hazards to develop a safe removal plan.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>Safety Preparation</h3>
+                        <p>We establish safety perimeters, secure the work area, and implement safety protocols for the team and property.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Strategic Cutting</h3>
+                        <p>Using specialized techniques, we carefully fell the tree in controlled sections to ensure safety and precision.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h3>Removal & Processing</h3>
+                        <p>We remove the tree sections, process the wood, and grind stumps as required.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div>
+                        <h3>Site Cleanup</h3>
+                        <p>We thoroughly clean the area, leaving your property neat and tidy with no trace of our work except the missing tree.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="service-cta">
+                <h2>Need Tree Services?</h2>
+                <p>Contact us for safe, professional tree removal that protects your property and gives you peace of mind.</p>
+                <a href="#" class="btn" data-page="contact">Schedule Tree Service</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Painting Page -->
+    <div id="painting" class="page">
+        <section class="service-hero">
+            <div class="container">
+                <h1>Painting Services</h1>
+                <p>Interior and exterior painting with premium materials and flawless finishes for lasting beauty</p>
+            </div>
+        </section>
+
+        <section class="container service-details">
+            <div class="service-content">
+                <h2>Transform Your Space with Professional Painting</h2>
+                <p>A fresh coat of paint can completely transform the look and feel of your property. At Pluto's Lifestyle and solution, we deliver exceptional painting results that enhance your space's aesthetics while providing durable protection.</p>
+                
+                <p>We use only high-quality paints and materials, combined with expert application techniques, to ensure a beautiful finish that stands the test of time.</p>
+                
+                <h3>Comprehensive Painting Solutions</h3>
+                <p>From single rooms to entire building exteriors, we handle painting projects of all sizes with the same commitment to quality and attention to detail.</p>
+                
+                <div class="folder">
+                    <h3>Painting Project Gallery</h3>
+                    <div class="folder-grid">
+                      <img src="project pictures/painting.1.jpg" alt="steel work" style="width:80%;border-radius:8px;">
+                      <img src="project pictures/painting.2.jpg" alt="steel work" style="width:80%;border-radius:8px;"> 
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-features">
+                <h3>Our Painting Services</h3>
+                <ul class="features-list">
+                    <li>Interior painting</li>
+                    <li>Exterior painting</li>
+                    <li>Commercial painting</li>
+                    <li>Residential painting</li>
+                    <li>Surface preparation</li>
+                    <li>Color consultation</li>
+                    <li>Wallpaper removal</li>
+                    <li>Drywall repair</li>
+                    <li>Cabinet refinishing</li>
+                    <li>Decorative finishes</li>
+                </ul>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background-color: #f8f9fa; border-radius: 6px;">
+                    <h4>Color Consultation</h4>
+                    <p>Unsure about colors? We offer professional color consultation to help you choose the perfect palette.</p>
+                    <a href="#" class="btn" data-page="contact">Get Color Advice</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="process-steps">
+            <div class="container">
+                <h2 style="text-align: center; color: #1a3a5f; margin-bottom: 3rem;">Our Painting Process</h2>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>Consultation & Color Selection</h3>
+                        <p>We discuss your vision, assess the space, and help select the perfect colors and finishes for your project.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>Surface Preparation</h3>
+                        <p>We meticulously prepare all surfaces, including cleaning, repairing, sanding, and priming for optimal results.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Protection & Setup</h3>
+                        <p>We protect your furniture, floors, and fixtures with professional-grade coverings and tapes.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h3>Precision Application</h3>
+                        <p>Our skilled painters apply paint with precision techniques, ensuring even coverage and clean lines.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div>
+                        <h3>Final Inspection & Cleanup</h3>
+                        <p>We conduct a thorough quality check and clean the workspace, leaving your property spotless.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="service-cta">
+                <h2>Ready for a Fresh Look?</h2>
+                <p>Transform your space with our professional painting services. Contact us for a consultation and quote.</p>
+                <a href="#" class="btn" data-page="contact">Start Your Painting Project</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Chicken Houses Page -->
+    <div id="chicken-houses" class="page">
+        <section class="service-hero">
+            <div class="container">
+                <h1>Chicken Houses</h1>
+                <p>Design and construction of custom chicken houses for small-scale farming and commercial poultry operations</p>
+            </div>
+        </section>
+
+        <section class="container service-details">
+            <div class="service-content">
+                <h2>Custom Poultry Housing Solutions</h2>
+                <p>Whether you're starting a small backyard flock or operating a commercial poultry farm, the right chicken house is essential for bird health, productivity, and ease of management. At Pluto's Lifestyle and solution, we design and build custom chicken houses tailored to your specific needs.</p>
+                
+                <p>Our poultry structures combine functionality, durability, and proper ventilation to create optimal living conditions for your birds.</p>
+                
+                <h3>Tailored Poultry Solutions</h3>
+                <p>We work closely with you to understand your flock size, management style, and budget to create the perfect poultry housing solution.</p>
+                
+                <div class="folder">
+                    <h3>Chicken House Gallery</h3>
+                    <div class="folder-grid">
+                       <img src="project pictures/chicken house.1.jpg" alt="steel work" style="width:80%;border-radius:8px;">
+                      <img src="project pictures/chicken house.2.jpg" alt="steel work" style="width:80%;border-radius:8px;"> 
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-features">
+                <h3>Our Chicken House Services</h3>
+                <ul class="features-list">
+                    <li>Custom chicken coop design</li>
+                    <li>Commercial poultry houses</li>
+                    <li>Free-range housing systems</li>
+                    <li>Ventilation system installation</li>
+                    <li>Feeding & watering systems</li>
+                    <li>Nesting box installation</li>
+                    <li>Predator-proof construction</li>
+                    <li>Insulation & climate control</li>
+                    <li>Waste management systems</li>
+                    <li>Poultry house maintenance</li>
+                </ul>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background-color: #f8f9fa; border-radius: 6px;">
+                    <h4>Free Design Consultation</h4>
+                    <p>Not sure what type of chicken house you need? We offer complimentary design consultations.</p>
+                    <a href="#" class="btn" data-page="contact">Schedule Consultation</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="process-steps">
+            <div class="container">
+                <h2 style="text-align: center; color: #1a3a5f; margin-bottom: 3rem;">Our Chicken House Construction Process</h2>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>Needs Assessment</h3>
+                        <p>We discuss your poultry operation goals, flock size, budget, and specific requirements for your chicken house.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>Custom Design</h3>
+                        <p>We create a custom design that optimizes space, ventilation, and functionality for your specific needs.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Material Selection</h3>
+                        <p>We help select durable, safe materials that provide proper insulation and protection for your birds.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h3>Construction</h3>
+                        <p>Our skilled builders construct your chicken house with attention to detail and poultry-specific requirements.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div>
+                        <h3>System Installation & Handover</h3>
+                        <p>We install feeding, watering and ventilation systems then provide a complete handover and operation guide.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="service-cta">
+                <h2>Build the Perfect Chicken House</h2>
+                <p>Ready to provide optimal housing for your poultry? Contact us to discuss your chicken house project.</p>
+                <a href="#" class="btn" data-page="contact">Start Your Poultry Project</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Pluto's Lifestyle and solution</h3>
+                    <p>Your trusted partner for property maintenance and construction services.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="#" data-page="steel-works">Steel Works</a></li>
+                        <li><a href="#" data-page="roof-maintenance">Roof Maintenance</a></li>
+                        <li><a href="#" data-page="tree-felling">Tree Felling</a></li>
+                        <li><a href="#" data-page="painting">Painting</a></li>
+                        <li><a href="#" data-page="chicken-houses">Chicken Houses</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" data-page="home">Home</a></li>
+                        <li><a href="#" data-page="about">About Us</a></li>
+                        <li><a href="#" data-page="contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li>10135 Mmakau Polonia section North West</li>
+                        <li>Phone: +27 70 315 1601</li>
+                        <li>Email: courageousmukuwe@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Pluto's Lifestyle and solution. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up navigation
+            const navLinks = document.querySelectorAll('.nav-link, .service-btn, .btn[data-page], .footer-column a[data-page]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    if (pageId) {
+                        showPage(pageId);
+                    }
+                });
+            });
+            
+            // Set up FAQ functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    faqItem.classList.toggle('active');
+                    
+                    // Toggle the + and - signs
+                    const span = question.querySelector('span');
+                    span.textContent = faqItem.classList.contains('active') ? '-' : '+';
+                });
+            });
+            
+            // Set up form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    this.reset();
+                });
+            }
+        });
+        
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Set the appropriate nav link as active
+            if (pageId === 'home') {
+                document.querySelector('.nav-link[data-page="home"]').classList.add('active');
+            } else if (pageId === 'about') {
+                document.querySelector('.nav-link[data-page="about"]').classList.add('active');
+            } else if (pageId === 'contact') {
+                document.querySelector('.nav-link[data-page="contact"]').classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
